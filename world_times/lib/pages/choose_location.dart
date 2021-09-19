@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:world_times/pages/loading.dart';
 
 class ChooseLocation extends StatefulWidget {
   const ChooseLocation({Key? key}) : super(key: key);
@@ -8,8 +9,12 @@ class ChooseLocation extends StatefulWidget {
 }
 
 class _ChooseLocationState extends State<ChooseLocation> {
+  List<String> t = [];
+
   @override
   Widget build(BuildContext context) {
+    t = timezones;
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -17,7 +22,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
         title: const Text('Choose a location'),
         centerTitle: true,
       ),
-      body: Text('Choose location screen'),
+      body: ListView.builder(
+        itemCount: timezones.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              onTap: () {},
+              title: Text(timezones[index]),
+            ),
+          );
+        },
+      ),
     );
   }
 }

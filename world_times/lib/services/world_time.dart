@@ -3,20 +3,20 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class WorldTime {
-  String location;
-  String? time;
-  String flag;
-  String url;
-  bool? isDay;
+  String location = 'unknown';
+  String time = 'unknown';
+  String url = 'ip';
+  bool isDay = false;
 
-  WorldTime({required this.location, required this.flag, required this.url});
+  WorldTime({required this.url});
 
   Future<void> getTime() async {
     try {
       Response response =
-          await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
+          await get(Uri.parse('http://worldtimeapi.org/api/$url'));
       Map data = jsonDecode(response.body);
 
+      location = data['timezone'];
       String datetime = data['datetime'];
       String offset = data['utc_offset'].substring(1, 3);
 
