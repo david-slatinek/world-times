@@ -7,6 +7,7 @@ class WorldTime {
   String? time;
   String flag;
   String url;
+  bool? isDay;
 
   WorldTime({required this.location, required this.flag, required this.url});
 
@@ -23,6 +24,7 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(offset)));
 
       time = DateFormat.jm().format(now);
+      isDay = now.hour > 6 && now.hour < 20 ? true : false;
     } catch (e) {
       print(e);
       time = 'error while getting data';

@@ -20,6 +20,7 @@ class _LoadingState extends State<Loading> {
       'location': time.location,
       'flag': time.flag,
       'time': time.time,
+      'isDay': time.isDay,
     });
   }
 
