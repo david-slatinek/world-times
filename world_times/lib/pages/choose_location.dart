@@ -19,6 +19,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
       'location': w.location,
       'time': w.time,
       'isDay': w.isDay,
+      'date': w.date,
     });
   }
 
@@ -29,7 +30,11 @@ class _ChooseLocationState extends State<ChooseLocation> {
       home: Scaffold(
         backgroundColor: Colors.grey[300],
         appBar: AppBar(
-          leading: const BackButton(color: Colors.black),
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           backgroundColor: Colors.blueAccent,
           title: const Text('Choose a location'),
           centerTitle: true,

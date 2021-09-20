@@ -40,11 +40,14 @@ class _HomeState extends State<Home> {
                       dynamic result =
                           await Navigator.pushNamed(context, '/location');
                       setState(() {
-                        data = {
-                          'location': result['location'],
-                          'time': result['time'],
-                          'isDay': result['isDay'],
-                        };
+                        if (result != null) {
+                          data = {
+                            'location': result['location'],
+                            'time': result['time'],
+                            'isDay': result['isDay'],
+                            'date': result['date'],
+                          };
+                        }
                       });
                     },
                     icon: const Icon(
@@ -57,9 +60,10 @@ class _HomeState extends State<Home> {
                   children: [
                     Text(
                       data['location'],
-                      style: TextStyle(fontSize: 28, letterSpacing: 2,
-                        color: data['isDay'] ? Colors.black : Colors.white
-                      ),
+                      style: TextStyle(
+                          fontSize: 28,
+                          letterSpacing: 2,
+                          color: data['isDay'] ? Colors.black : Colors.white),
                     ),
                   ],
                 ),
@@ -69,9 +73,17 @@ class _HomeState extends State<Home> {
                 Text(
                   data['time'],
                   style: TextStyle(
-                    fontSize: 60,
-                    color: data['isDay'] ? Colors.black : Colors.white
-                  ),
+                      fontSize: 60,
+                      color: data['isDay'] ? Colors.black : Colors.white),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  data['date'],
+                  style: TextStyle(
+                      fontSize: 30,
+                      color: data['isDay'] ? Colors.black : Colors.white),
                 ),
               ],
             ),

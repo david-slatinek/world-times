@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 class WorldTime {
   String location = 'unknown';
   String time = 'unknown';
+  String date = 'unknown';
   String url = 'ip';
   bool isDay = false;
 
@@ -24,6 +25,7 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(offset)));
 
       time = DateFormat('HH:mm').format(now);
+      date = DateFormat('dd-MM-yyyy').format(now);
       isDay = now.hour > 6 && now.hour < 20 ? true : false;
     } catch (e) {
       time = 'error while getting data';
