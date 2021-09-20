@@ -23,10 +23,9 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: int.parse(offset)));
 
-      time = DateFormat.jm().format(now);
+      time = DateFormat('HH:mm').format(now);
       isDay = now.hour > 6 && now.hour < 20 ? true : false;
     } catch (e) {
-      print(e);
       time = 'error while getting data';
     }
   }

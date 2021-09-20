@@ -12,7 +12,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isNotEmpty
+        ? data
+        : ModalRoute.of(context)!.settings.arguments as Map;
     String img = data['isDay'] ? 'day.jpg' : 'night.jpg';
     Color clr = data['isDay'] ? Colors.blue : Colors.blueAccent;
 
@@ -34,29 +36,41 @@ class _HomeState extends State<Home> {
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.indigo)),
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, '/location')},
-                    icon: Icon(
+                    onPressed: () async {
+                      dynamic result =
+                          await Navigator.pushNamed(context, '/location');
+                      setState(() {
+                        data = {
+                          'location': result['location'],
+                          'time': result['time'],
+                          'isDay': result['isDay'],
+                        };
+                      });
+                    },
+                    icon: const Icon(
                       Icons.edit_location,
                     ),
-                    label: Text('Edit location')),
-                SizedBox(height: 20),
+                    label: const Text('Edit location')),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       data['location'],
-                      style: TextStyle(fontSize: 28, letterSpacing: 2),
+                      style: TextStyle(fontSize: 28, letterSpacing: 2,
+                        color: data['isDay'] ? Colors.black : Colors.white
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
                   data['time'],
                   style: TextStyle(
                     fontSize: 60,
+                    color: data['isDay'] ? Colors.black : Colors.white
                   ),
                 ),
               ],
